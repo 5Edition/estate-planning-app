@@ -1,40 +1,50 @@
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
+import { ShieldCheck, ArrowRight } from 'lucide-react';
 
 export default function App() {
   const [step, setStep] = useState(0);
 
   return (
-    <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
-      {/* Decorative Background Element */}
-      <div className="absolute inset-0 overflow-hidden opacity-20">
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-500 rounded-full blur-3xl"></div>
-      </div>
-
-      {/* Main Glassmorphism Card */}
-      <main className="relative w-full max-w-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 rounded-3xl shadow-2xl">
-        {/* Progress Indicator */}
-        <div className="flex gap-2 mb-8">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className={`h-1 flex-1 rounded-full ${step >= i-1 ? 'bg-blue-400' : 'bg-white/10'}`}></div>
-          ))}
-        </div>
-
-        <h1 className="font-serif text-5xl text-white mb-6 tracking-tight">
-          Estate Planning <span className="text-blue-400">Simplified.</span>
-        </h1>
-        
-        <p className="text-slate-300 text-lg mb-10 leading-relaxed">
-          Secure, AI-powered insights for your Canadian estate. We handle the complexity; you retain the control.
-        </p>
-
-        <button 
-          onClick={() => setStep(1)}
-          className="group relative px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-500 transition-all active:scale-95"
+    <div className="min-h-screen bg-slate-950 flex items-center justify-center p-6 overflow-hidden">
+      {/* Dynamic Background Glow */}
+      <div className="absolute w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] -top-20 -left-20 animate-pulse" />
+      
+      <AnimatePresence mode="wait">
+        <motion.main 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          className="relative w-full max-w-xl bg-white/5 backdrop-blur-2xl border border-white/10 p-10 rounded-3xl shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)]"
         >
-          Begin Consultation
-          <span className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-        </button>
-      </main>
+          {/* Status Bar */}
+          <div className="flex gap-2 mb-10">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className={`h-1.5 flex-1 rounded-full transition-colors ${step >= i-1 ? 'bg-blue-500' : 'bg-white/10'}`} />
+            ))}
+          </div>
+
+          <ShieldCheck className="w-12 h-12 text-blue-400 mb-6" />
+          
+          <h1 className="text-4xl md:text-5xl font-serif text-white mb-6 tracking-tight leading-tight">
+            Estate Planning<br/>
+            <span className="text-blue-400 font-sans italic">by Design.</span>
+          </h1>
+
+          <p className="text-slate-400 text-lg mb-10 leading-relaxed">
+            A secure, AI-powered environment for Canadian estate management. 
+            Privacy-first and jurisdictionally aware.
+          </p>
+
+          <button 
+            onClick={() => setStep(1)}
+            className="group flex items-center gap-3 bg-white text-slate-950 px-8 py-4 rounded-xl font-semibold hover:bg-blue-100 transition-all active:scale-95"
+          >
+            Start Consultation
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </button>
+        </motion.main>
+      </AnimatePresence>
     </div>
   );
 }
