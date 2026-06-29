@@ -1,7 +1,7 @@
 {
+  "$schema": "node_modules/wrangler/config-schema.json",
   "name": "estate-planning-app",
-  "compatibility_date": "2026-06-28",
-  "assets": {
-    "directory": "./dist"
-  }
+  // This is the specific setting for Cloudflare Pages
+  "pages_build_output_dir": "dist",
+  "compatibility_date": "2026-06-28"
 }
