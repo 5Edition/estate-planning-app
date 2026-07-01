@@ -1,5 +1,5 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "estate-planning-app",
-  "compatibility_date": "2026-06-28"
+  "compatibility_date": "2026-06-21"
 }
